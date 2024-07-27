@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="container-form">
+        <div class="header-form">
+            <h2>{{title}}</h2>
+        </div>
+
+        <div>
+            <form [formGroup]="createItemGroup" autocomplete="off" class="boddy-form">
+                <div class="center">
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">ID</mat-label>
+                    <input type="text" class="form-input" matInput placeholder="id" formControlName="id">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('id')?.hasError('required')">
+                      ID es requerido.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('id')?.hasError('minlength')">
+                      ID debe tener al menos 3 caracteres.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('id')?.hasError('maxlength')">
+                      ID no puede tener más de 10 caracteres.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('id')?.invalid && !createItemGroup.get('id')?.hasError('required') && !createItemGroup.get('id')?.hasError('minlength') && !createItemGroup.get('id')?.hasError('maxlength')">
+                      ID no válido.
+                    </mat-hint>
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">NOMBRE COMPLETO*</mat-label>
+                    <input type="text" class="form-input" matInput placeholder="Nombre" formControlName="name">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('name')?.hasError('required')">
+                      Este campo es requerido.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('name')?.hasError('minlength')">
+                      Nombre debe tener al menos 5 caracteres (excluyendo espacios).
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('name')?.hasError('maxlength')">
+                      Nombre no puede tener más de 10 caracteres (excluyendo espacios).
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('name')?.hasError('whitespace')">
+                      El nombre no puede contener solo espacios.
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              
+                <div class="center">
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">DESCRIPCIÓN</mat-label>
+                    <input type="text" class="form-input" matInput placeholder="Descripción" formControlName="description">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('description')?.hasError('required')">
+                      Este campo es requerido.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('description')?.hasError('minlength')">
+                      Descripción debe tener al menos 10 caracteres.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('description')?.hasError('maxlength')">
+                      Descripción no puede tener más de 200 caracteres.
+                    </mat-hint>
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">LOGO</mat-label>
+                    <input type="text" class="form-input" matInput placeholder="URL del logo" formControlName="logo">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('logo')?.hasError('required')">
+                      Este campo es requerido.
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              
+                <div class="center">
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">FECHA DE LIBERACIÓN</mat-label>
+                    <input type="date" class="form-input" matInput formControlName="date_release">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('date_release')?.hasError('required')">
+                      Este campo es requerido.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('date_release')?.hasError('invalidDate')">
+                      La fecha debe ser igual o posterior a hoy.
+                    </mat-hint>
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill" class="content">
+                    <mat-label position="floating">FECHA DE REESTRUCTURACIÓN</mat-label>
+                    <input type="date" class="form-input" matInput formControlName="date_revision">
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('date_revision')?.hasError('required')">
+                      Este campo es requerido.
+                    </mat-hint>
+                    <mat-hint class="form-alert" error *ngIf="createItemGroup.get('date_revision')?.hasError('invalidRevisionDate')">
+                      La fecha de reestructuración debe ser al menos un año después de la fecha de liberación.
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </form>
+              
+        </div>
+
+
+        <div class="footer-form">
+            <button class="btn" (click)="generateItemGroup()">Reiniciar</button>
+            <button class="btn btn-agregar" [disabled]="createItemGroup.invalid" (click)="createProduct()">Enviar</button>
+        </div>
+    </div>
+</div>
