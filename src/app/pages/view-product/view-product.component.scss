@@ -1,0 +1,80 @@
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: white;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-input:focus {
+  border-color: #ccc;
+}
+
+// tabla:
+.table-container {
+  overflow: auto;
+  max-height: 400px;
+  max-width: 100%;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f4f4f4;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo-img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.paginator {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+
+.paginator select {
+  padding: 4px;
+}
+
+.container-actions{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.btn-agregar { 
+  background-color: #f5df66;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-agregar:hover {
+  background-color: #f8e681;
+}

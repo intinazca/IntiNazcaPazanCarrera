@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="container">
+    <div class="container-actions">
+        <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm"  (input)="onSearchTermChange()">
+        <button class="btn-agregar">Agregar</button>
+    </div>
+
+    <div class="container-table">
+        <div *ngIf="paginatedValues.length > 0">
+            <div class="table-container">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Logo</th>
+                            <th>Nombre del Producto</th>
+                            <th>Descripción</th>
+                            <th>Fecha de liberación</th>
+                            <th>Fecha de reestructuración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of paginatedValues; trackBy: trackById">
+                            <td><img [src]="item.logo" alt="Logo" class="logo-img"></td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.date_revision}}</td>
+                            <td>{{item.date_release}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginator">
+                <label for="rowsPerPage"><strong>{{paginatedValues.length}} Resultados</strong></label>
+                <select id="rowsPerPage" [(ngModel)]="rowsPerPage" (change)="onRowsPerPageChange()">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <p *ngIf="paginatedValues.length === 0">Sin datos disponibles</p>
+    </div>
+</div>

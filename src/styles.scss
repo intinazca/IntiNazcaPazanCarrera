@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+.logo{
+    background-color: transparent;
+    margin: 0.5rem;
+    width: 2rem;
+}
+
+body{
+    background-color: #f4f6f9;
+    margin: 0px;
+}
+
+.container{
+    padding: 3rem;
+}
+
+.container-table{
+margin-top: 1rem;
+margin-bottom: 1rem;
+padding: 1rem;
+background-color: white;
+border-radius: 5px;
+}
