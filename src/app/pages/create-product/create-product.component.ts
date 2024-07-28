@@ -11,7 +11,7 @@ import { Product } from '../../interface/interface';
 export class createProductComponent implements OnInit {
   type: any;
   optionalParam: string | null = null;
-  produtToEdit!: Product;
+  produtToEdit: Product[] = [];
 
   constructor(
     private route: ActivatedRoute,
