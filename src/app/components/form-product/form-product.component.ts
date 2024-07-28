@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Product, DataAlert, toastInterface } from '../../interface/interface';
 import { ProductService } from '../../services/product.service';
@@ -8,9 +8,16 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './form-product.component.html',
   styleUrl: './form-product.component.scss'
 })
-export class FormProductComponent {
+export class FormProductComponent implements OnInit {
+  // variables del edit
+  @Input() produtToEdit!: Product;
+  @Input() type!: string;
+
+  // variables de formulario
   createItemGroup!: FormGroup;
   title: string = "Formulario de Registro";
+  buttonTitle: string = 'Enviar';
+  editableId: boolean = false;
 
   // variables del toast
   toastVisible: boolean = false;
@@ -21,11 +28,32 @@ export class FormProductComponent {
     // formulario
     public builderForm: FormBuilder,
   ) {
-    this.generateItemGroup();
+
   }
 
-  generateItemGroup() {
-    this.createItemGroup = this.builderForm.group(this.getFormControls());
+  ngOnInit(): void {
+    this.validateIsEdit();
+  }
+
+  async validateIsEdit() {
+    console.log("type: ", this.type);
+    console.log("editamos: ", this.produtToEdit);
+
+    if (this.type == 'edit' && this.produtToEdit) {
+      this.buttonTitle = 'Editar';
+      this.editableId = true;
+      await this.generateItemGroup(this.produtToEdit);
+      return
+    } else {
+      this.generateItemGroup();
+    }
+
+  }
+
+  generateItemGroup(initialValues?: Product) {
+    console.log("initialValues: ", initialValues);
+
+    this.createItemGroup = this.builderForm.group(this.getFormControls(initialValues));
 
     this.createItemGroup.get('date_revision')?.setValidators([
       Validators.required,
@@ -33,30 +61,34 @@ export class FormProductComponent {
     ]);
   }
 
-  getFormControls(): { [key in keyof Product]: FormControl } {
+  getFormControls(initialValues?: Product): { [key in keyof Product]: FormControl } {
     return {
-      id: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(10)
-      ]),
-      name: new FormControl('', [
+      id: new FormControl(
+        { value: initialValues?.id || '', disabled: this.editableId },
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10)
+        ]
+      ),
+
+      name: new FormControl(initialValues?.name || '', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
         this.noWhitespaceValidator
       ]),
-      description: new FormControl('', [
+      description: new FormControl(initialValues?.description || '', [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(200)
       ]),
-      logo: new FormControl('', Validators.required),
-      date_release: new FormControl('', [
+      logo: new FormControl(initialValues?.logo || '', Validators.required),
+      date_release: new FormControl(initialValues?.date_release || '', [
         Validators.required,
         this.futureOrTodayDateValidator
       ]),
-      date_revision: new FormControl(''),
+      date_revision: new FormControl(initialValues?.date_revision || ''),
     };
   }
 
@@ -102,21 +134,33 @@ export class FormProductComponent {
 
   async createProduct() {
     try {
-      const exist = await this.service.getProductId(this.createItemGroup.value.id);
-      console.log("existe", exist);
-      if (!exist) {
-        console.log("data a mandar:", this.createItemGroup.value);
-        const response = await this.service.postProduct(this.createItemGroup.value);
-        console.log("respuesta: ", response);
+      const idValue = this.createItemGroup.get('id')?.value;
+
+      if (this.type == 'edit' && this.produtToEdit) {
+        // editamos el registro
+        const response = await this.service.updateProduct(this.createItemGroup.value, idValue);
+        console.log("response:", response);
 
         if (response.message) {
-          console.log("guardado con exito");
-          this.showToast({ message: 'Guardado con exito', duration: 3000, type: 'success' });
+          console.log("editafo con exito");
+          this.showToast({ message: 'Editado con exito', duration: 3000, type: 'success' });
         }
       } else {
-        console.log("ya existe con ese id");
-        this.showToast({ message: 'El producto ya esxiste con ese id', duration: 3000, type: 'warning' });
+        // creamos uno nuevo
+        const exist = await this.service.getProductId(idValue);
+
+        if (!exist) {
+          const response = await this.service.postProduct(this.createItemGroup.value);
+
+          if (response.message) {
+            this.showToast({ message: 'Guardado con exito', duration: 3000, type: 'success' });
+          }
+        } else {
+          console.log("ya existe con ese id");
+          this.showToast({ message: 'El producto ya esxiste con ese id', duration: 3000, type: 'warning' });
+        }
       }
+
     } catch (error) {
       // toast de error
       this.showToast({ message: 'Error al guardar', duration: 3000, type: 'error' });

@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product, toastInterface } from '../../interface/interface';
 import { Router } from '@angular/router';
+import { stateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-view-product',
@@ -27,7 +28,8 @@ export class ViewProductComponent implements OnInit {
 
   constructor(
     private service: ProductService,
-    private router: Router
+    private router: Router,
+    private stateService: stateService
   ) { }
 
   ngOnInit() {
@@ -72,7 +74,8 @@ export class ViewProductComponent implements OnInit {
     this.router.navigate(['/create-product']);
   }
 
-  navigateToEditProduct() {
+  navigateToEditProduct(data: Product) {
+    this.stateService.setData(data);
     this.router.navigate(['/create-product/edit']);
   }
 
@@ -96,8 +99,7 @@ export class ViewProductComponent implements OnInit {
     this.openDropdownId = null;
     this.produtToEdit = item;
     console.log('Editing item:', this.produtToEdit);
-    // this.navigateToEditProduct()
-    // Implement edit logic here
+    this.navigateToEditProduct(item)
   }
 
   deleteItem(item: Product) {

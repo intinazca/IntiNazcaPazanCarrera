@@ -45,7 +45,7 @@ export class ProductService {
         })
     }
     //actualizar prodcuto
-    updataProduct(data: any, id: string): Promise<any> {
+    updateProduct(data: any, id: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.http.put(`/bp/products/${id}`, data)
                 .subscribe(
