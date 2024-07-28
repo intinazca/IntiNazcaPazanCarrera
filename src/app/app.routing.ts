@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'create-product',
         component: createProductComponent
     },
+    {
+        path: 'create-product/:param',
+        component: createProductComponent
+      },
 
 ];
 

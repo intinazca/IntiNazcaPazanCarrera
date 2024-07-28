@@ -95,10 +95,13 @@
 
     </div>
 
-
     <div class="footer-form">
-      <button class="btn" (click)="generateItemGroup()">Reiniciar</button>
-      <button class="btn btn-agregar" [disabled]="createItemGroup.invalid" (click)="createProduct()">Enviar</button>
+      <div>
+        <button class="btn" (click)="generateItemGroup()">Reiniciar</button>
+      </div>
+      <div>
+        <button class="btn btn-agregar" [disabled]="createItemGroup.invalid" (click)="createProduct()">Enviar</button>
+      </div>
     </div>
   </div>
 </div>

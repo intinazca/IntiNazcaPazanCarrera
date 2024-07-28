@@ -1,14 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', Arial, sans-serif; 
+    background-color: #f4f6f9;
+    margin: 0px;
+}
 
 .logo {
     background-color: transparent;
     margin: 0.5rem;
     width: 2rem;
-}
-
-body {
-    background-color: #f4f6f9;
-    margin: 0px;
 }
 
 h2 {
@@ -19,10 +21,10 @@ h2 {
     padding: 3rem;
     display: flex;
     justify-content: center;
-    width: 100%;
+    // width: 100%;
 }
 
-.center{
+.center {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,8 +41,9 @@ h2 {
 
 //stylo global para botones
 .btn {
+    width: 100%;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 10px 20px;
     font-size: 14px;
     cursor: pointer;
@@ -90,7 +93,7 @@ h2 {
 .footer-form {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
     margin: 10px 0px;
 }
 
@@ -156,3 +159,27 @@ h2 {
 .form-input.ng-invalid.ng-touched {
     border-color: red;
 }
+
+.dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+  }
+  
+  .dropdown li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .dropdown li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .menu-button {
+    cursor: pointer;
+  }
+  

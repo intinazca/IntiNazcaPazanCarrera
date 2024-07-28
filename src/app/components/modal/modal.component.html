@@ -1,1 +1,11 @@
-<p>modal works!</p>
+<div class="modal-backdrop">
+    <div class="modal-content">
+        <div class="header-form spacing">
+            <p>{{ message }}</p>
+        </div>
+        <div class="modal-buttons">
+            <button class="btn" (click)="onCancel()">Cancelar</button>
+            <button class="btn btn-agregar" (click)="onConfirm()">Confirmar</button>
+        </div>
+    </div>
+</div>

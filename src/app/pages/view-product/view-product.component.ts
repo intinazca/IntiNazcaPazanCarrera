@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { Product } from '../../interface/interface';
+import { Product, toastInterface } from '../../interface/interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,12 +15,26 @@ export class ViewProductComponent implements OnInit {
   paginatedValues: Product[] = [];
   searchTerm: string = '';
 
+  // variables modal
+  openDropdownId: string | null = null;
+  showModal: boolean = false;
+  messageModal: string = '';
+  produtToEdit!: Product;
+
+  // variables del toast
+  toastVisible: boolean = false;
+  toastData!: toastInterface;
+
   constructor(
     private service: ProductService,
     private router: Router
-  ) {}
+  ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.initValues();
+  }
+
+  async initValues(){
     try {
       const { data } = await this.service.getProduct();
       this.tableValues = data;
@@ -54,8 +68,81 @@ export class ViewProductComponent implements OnInit {
     return item.id;
   }
 
-  navigateToCreateProduct(){
+  navigateToCreateProduct() {
     this.router.navigate(['/create-product']);
   }
-  
+
+  navigateToEditProduct() {
+    this.router.navigate(['/create-product/edit']);
+  }
+
+  //menu contextual
+  toggleDropdown(id: string) {
+    this.openDropdownId = this.openDropdownId === id ? null : id;
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+
+    // Verifica si el clic fue fuera del menú desplegable
+    if (!targetElement.closest('.dropdown') && !targetElement.closest('.menu-button')) {
+      this.openDropdownId = null;
+    }
+  }
+
+  editItem(item: Product) {
+    this.openDropdownId = null;
+    this.produtToEdit = item;
+    console.log('Editing item:', this.produtToEdit);
+    // this.navigateToEditProduct()
+    // Implement edit logic here
+  }
+
+  deleteItem(item: Product) {
+    this.openDropdownId = null;
+    this.messageModal = `¿Estas seguro de elimiar el producto ${item.name}?`;
+    this.produtToEdit = item;
+    console.log('Editing item:', this.produtToEdit);
+    this.openModal();
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  async handleModalResult(result: any) {
+    try {
+      this.showModal = false; // Cierra el modal
+      if (result) {
+        console.log('Confirmado');
+        const response = await this.service.deleteProduct(this.produtToEdit.id);
+        console.log("response: ", response);
+        if (response.message) {
+          await this.initValues();
+          this.showToast({ message: `${response.message}`, duration: 3000, type: 'success' });
+        }
+      } else {
+        console.log('Cancelado');
+      }
+    } catch (error) {
+      this.showToast({ message: 'Error al guardar', duration: 3000, type: 'error' });
+      console.log(error);
+    }
+  }
+
+  async refreshData(){
+
+  }
+
+  // metodos toast
+  showToast(data: toastInterface) {
+    this.toastData = data;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, data.duration);
+  }
+
 }

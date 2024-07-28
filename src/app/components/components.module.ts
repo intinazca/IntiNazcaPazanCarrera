@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HeaderComponent } from "./header/header.component";
 import { FormProductComponent } from "./form-product/form-product.component";
 import { ToastComponent } from "./toast/toast.component";
+import { ModalComponent } from "./modal/modal.component";
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
@@ -16,13 +17,15 @@ import { ToastComponent } from "./toast/toast.component";
         //aqui los componentes
         HeaderComponent,
         FormProductComponent,
-        ToastComponent
+        ToastComponent,
+        ModalComponent
     ],
     exports: [
         //aqui los componentes
         HeaderComponent,
         FormProductComponent,
-        ToastComponent
+        ToastComponent,
+        ModalComponent
     ]
 })
 

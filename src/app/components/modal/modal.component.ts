@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
-  standalone: true,
-  imports: [],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss'
+  styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent {
 
+export class ModalComponent {
+  @Input() message: string = '';
+  @Output() result = new EventEmitter<boolean>();
+
+  onCancel() {
+    this.result.emit(false);
+  }
+
+  onConfirm() {
+    this.result.emit(true);
+  }
 }

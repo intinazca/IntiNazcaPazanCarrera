@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Product, DataAlert, toastInterface } from '../../interface/interface';
 import { ProductService } from '../../services/product.service';
-import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-form-product',
@@ -122,7 +121,6 @@ export class FormProductComponent {
       // toast de error
       this.showToast({ message: 'Error al guardar', duration: 3000, type: 'error' });
       console.log(error);
-
     }
   }
 

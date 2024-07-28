@@ -1,10 +1,13 @@
 <div class="container">
-    <div>
+    <div style="width: 100%;">
         <div class="container-actions">
-            <input type="text" class="custon-input" placeholder="Search..." [(ngModel)]="searchTerm"  (input)="onSearchTermChange()">
-            <button class="btn btn-agregar" (click)="navigateToCreateProduct()">Agregar</button>
+            <input type="text" class="custon-input" placeholder="Search..." [(ngModel)]="searchTerm"
+                (input)="onSearchTermChange()">
+            <div>
+                <button class="btn btn-agregar" (click)="navigateToCreateProduct()">Agregar</button>
+            </div>
         </div>
-    
+
         <div class="container-table">
             <div *ngIf="paginatedValues.length > 0">
                 <div class="table-container">
@@ -13,9 +16,10 @@
                             <tr>
                                 <th>Logo</th>
                                 <th>Nombre del Producto</th>
-                                <th>Descripción</th>
-                                <th>Fecha de liberación</th>
-                                <th>Fecha de reestructuración</th>
+                                <th>Descripción  <span class="info-icon">i</span> </th>
+                                <th>Fecha de liberación  <span class="info-icon">i</span></th>
+                                <th>Fecha de reestructuración  <span class="info-icon">i</span></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +29,15 @@
                                 <td>{{item.description}}</td>
                                 <td>{{item.date_revision}}</td>
                                 <td>{{item.date_release}}</td>
+                                <td>
+                                    <div class="menu-button" (click)="toggleDropdown(item.id)">
+                                        <span class="dots">&#x2022;&#x2022;&#x2022;</span>
+                                    </div>
+                                    <ul *ngIf="item.id === openDropdownId" class="dropdown">
+                                        <li (click)="editItem(item)">Editar</li>
+                                        <li (click)="deleteItem(item)">Eliminar</li>
+                                    </ul>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -42,3 +55,5 @@
         </div>
     </div>
 </div>
+<app-modal *ngIf="showModal" [message]="messageModal" (result)="handleModalResult($event)"></app-modal>
+<app-toast *ngIf="toastVisible" [toastData]="toastData"></app-toast>

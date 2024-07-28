@@ -7,13 +7,15 @@
 
 .product-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; //elimina los espacios entre bordess
 }
 
 .product-table th,
 .product-table td {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
   padding: 8px;
+  padding: 1rem 2rem;
   text-align: left;
 }
 
@@ -23,6 +25,11 @@
   top: 0;
   z-index: 1;
 }
+
+.product-table tr:hover {
+  background-color: #f1f1f1; 
+}
+
 
 .logo-img {
   max-width: 50px;
@@ -43,4 +50,27 @@
 .container-actions{
   display: flex;
   justify-content: space-between;
+}
+
+label{
+  font-size: 14px;
+}
+
+
+.info-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: #939397; /* Fondo gris */
+  color: #fff; /* Color del texto */
+  text-align: center;
+  font-size: 12px;
+  margin-left: 5px;
+  cursor: default; /* Cursor por defecto para íconos informativos */
+}
+
+.info-icon:hover {
+  background-color: #bbb; /* Fondo más oscuro al pasar el ratón por encima */
 }
