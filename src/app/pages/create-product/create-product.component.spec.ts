@@ -71,7 +71,8 @@ describe('createProductComponent', () => {
   });
 
   it('should get product data from state service if type is edit', () => {
-    component.produtToEdit = [
+    component.type = 'edit'; 
+    component.produtToEdit = 
       {
         id: '1',
         name: 'Product 1',
@@ -79,12 +80,12 @@ describe('createProductComponent', () => {
         date_revision: '2024-01-01',
         date_release: '2024-02-01',
         logo: 'logo1.png'
-      }];
+      };
     expect(mockStateService.getData).toHaveBeenCalled();
   });
 
   it('should pass the correct inputs to the child component', () => {
-    component.produtToEdit = [
+    component.produtToEdit =
       {
         id: '1',
         name: 'Product 1',
@@ -92,7 +93,7 @@ describe('createProductComponent', () => {
         date_revision: '2024-01-01',
         date_release: '2024-02-01',
         logo: 'logo1.png'
-      }];
+      };
     const formProductComponent = fixture.debugElement.query(By.css('app-form-product')).componentInstance;
     expect(formProductComponent.type).toBe('edit');
   });
