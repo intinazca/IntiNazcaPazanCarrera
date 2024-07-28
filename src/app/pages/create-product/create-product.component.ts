@@ -21,7 +21,7 @@ export class createProductComponent implements OnInit {
     console.log("this.type:", this.type);
     
     if (this.type == 'edit') {
-      this.produtToEdit = this.stateService.getData(); // Obtén los datos desde el servicio
+      this.produtToEdit = this.stateService.getData();
       console.log("productoa editar",this.produtToEdit);
     }
   }
@@ -31,7 +31,7 @@ export class createProductComponent implements OnInit {
 
   getParamRoute() {
     this.route.paramMap.subscribe(params => {
-        this.type = params.get('param'); // Obtener el parámetro opcional
+        this.type = params.get('param');
     });
   }
 

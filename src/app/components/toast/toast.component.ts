@@ -16,7 +16,7 @@ export class ToastComponent implements OnInit {
   }
 
   show() {
-    const duration = this.toastData.duration ?? 3000; // Valor predeterminado
+    const duration = this.toastData.duration ?? 3000;
     this.visible = true;
     setTimeout(() => {
       this.visible = false;

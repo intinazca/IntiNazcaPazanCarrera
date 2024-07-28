@@ -91,6 +91,4 @@ describe('ViewProductComponent', () => {
     expect(component.showModal).toBeTrue();
     expect(component.messageModal).toContain('Product 1');
   });
-
-  // Agrega más pruebas según sea necesario
 });
