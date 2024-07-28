@@ -8,7 +8,7 @@ describe('ModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalComponent]
+      declarations: [ModalComponent]
     })
     .compileComponents();
     

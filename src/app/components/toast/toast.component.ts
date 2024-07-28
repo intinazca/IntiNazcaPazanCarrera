@@ -8,7 +8,7 @@ import { toastInterface } from '../../interface/interface';
 })
 
 export class ToastComponent implements OnInit {
-  @Input() toastData!: toastInterface;
+  @Input() toastData: toastInterface = { message: '', duration: 3000, type: 'success' };
   visible: boolean = false;
 
   ngOnInit() {
@@ -16,9 +16,11 @@ export class ToastComponent implements OnInit {
   }
 
   show() {
+    const duration = this.toastData.duration ?? 3000; // Valor predeterminado
     this.visible = true;
     setTimeout(() => {
       this.visible = false;
-    }, this.toastData.duration);
+    }, duration);
   }
 }
+

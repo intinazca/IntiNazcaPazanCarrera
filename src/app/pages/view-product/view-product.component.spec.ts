@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ViewProductComponent } from './view-product.component';
+import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule } from '@angular/forms'; 
 
 describe('ViewProductComponent', () => {
   let component: ViewProductComponent;
@@ -8,9 +9,12 @@ describe('ViewProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewProductComponent]
-    })
-    .compileComponents();
+      declarations: [ViewProductComponent],
+      imports: [
+        HttpClientModule,
+        FormsModule 
+      ]
+    }).compileComponents();
     
     fixture = TestBed.createComponent(ViewProductComponent);
     component = fixture.componentInstance;

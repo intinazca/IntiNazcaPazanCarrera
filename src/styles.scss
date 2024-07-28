@@ -145,7 +145,7 @@ h2 {
     justify-content: center;
 }
 
-.content mat-label {
+.content label {
     font-size: 10px;
 }
 
@@ -154,6 +154,7 @@ h2 {
 .form-alert {
     color: red;
     font-size: 12px;
+    margin: 0px;
 }
 
 .form-input.ng-invalid.ng-touched {
