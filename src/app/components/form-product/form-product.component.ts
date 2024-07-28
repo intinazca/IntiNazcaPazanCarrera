@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Product } from '../../interface/interface';
+import { Product, DataAlert, toastInterface } from '../../interface/interface';
 import { ProductService } from '../../services/product.service';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-form-product',
@@ -11,6 +12,10 @@ import { ProductService } from '../../services/product.service';
 export class FormProductComponent {
   createItemGroup!: FormGroup;
   title: string = "Formulario de Registro";
+
+  // variables del toast
+  toastVisible: boolean = false;
+  toastData!: toastInterface;
 
   constructor(
     private service: ProductService,
@@ -67,18 +72,18 @@ export class FormProductComponent {
   futureOrTodayDateValidator(control: AbstractControl): ValidationErrors | null {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
-  
+
     const selectedDate = new Date(control.value);
     selectedDate.setHours(0, 0, 0, 0);
-  
+
     // Verificar si las fechas son válidas
     if (isNaN(selectedDate.getTime())) {
       return { invalidDateFormat: true };
     }
-  
+
     return selectedDate >= currentDate ? null : { invalidDate: true };
   }
-  
+
 
   oneYearAfterReleaseValidator(control: AbstractControl): ValidationErrors | null {
     const releaseDateValue = this.createItemGroup.get('date_release')?.value;
@@ -99,24 +104,34 @@ export class FormProductComponent {
   async createProduct() {
     try {
       const exist = await this.service.getProductId(this.createItemGroup.value.id);
-      console.log("existe", exist );
+      console.log("existe", exist);
       if (!exist) {
         console.log("data a mandar:", this.createItemGroup.value);
         const response = await this.service.postProduct(this.createItemGroup.value);
         console.log("respuesta: ", response);
-        
+
         if (response.message) {
           console.log("guardado con exito");
-          
+          this.showToast({ message: 'Guardado con exito', duration: 3000, type: 'success' });
         }
-      }else{
+      } else {
         console.log("ya existe con ese id");
-        
+        this.showToast({ message: 'El producto ya esxiste con ese id', duration: 3000, type: 'warning' });
       }
     } catch (error) {
-      console.log([error]);
+      // toast de error
+      this.showToast({ message: 'Error al guardar', duration: 3000, type: 'error' });
+      console.log(error);
 
     }
+  }
+
+  showToast(data: toastInterface) {
+    this.toastData = data;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, data.duration);
   }
 
 }
