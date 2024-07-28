@@ -52,7 +52,10 @@ export class FormProductComponent implements OnInit {
 
   generateItemGroup(initialValues?: Product) {
     console.log("initialValues: ", initialValues);
-
+    if (!initialValues) {
+      this.editableId = false;
+      this.buttonTitle = 'Enviar';
+    }
     this.createItemGroup = this.builderForm.group(this.getFormControls(initialValues));
 
     this.createItemGroup.get('date_revision')?.setValidators([
