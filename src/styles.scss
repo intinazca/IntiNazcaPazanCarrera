@@ -1,24 +1,158 @@
 /* You can add global styles to this file, and also import other style files */
 
-.logo{
+.logo {
     background-color: transparent;
     margin: 0.5rem;
     width: 2rem;
 }
 
-body{
+body {
     background-color: #f4f6f9;
     margin: 0px;
 }
 
-.container{
-    padding: 3rem;
+h2 {
+    margin: 10px 0px;
 }
 
-.container-table{
-margin-top: 1rem;
-margin-bottom: 1rem;
-padding: 1rem;
-background-color: white;
-border-radius: 5px;
+.container {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.container-table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+}
+
+//stylo global para botones
+.btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-agregar {
+    background-color: #f5df66;
+}
+
+.btn-agregar:hover {
+    background-color: #f8e681;
+}
+
+// stylos golbales para formularios
+
+.mat-form-field {
+    flex: 1 1 calc(50% - 16px);
+    /* Dos columnas con espacio entre ellas */
+}
+
+@media (max-width: 600px) {
+    .mat-form-field {
+        flex: 1 1 100%;
+        /* Una columna en pantallas pequeñas */
+    }
+}
+
+.container-form {
+    width: 100%;
+    max-width: 750px;
+    padding: 1rem 0rem;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.header-form {
+    text-align: center;
+    border-bottom: 2px solid gray;
+}
+
+.boddy-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 10px 0px;
+}
+
+/* Estilos CSS INPUTS */
+.custon-input {
+    width: 100%;
+    max-width: 300px;
+    min-width: 100px;
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+    outline: none;
+}
+
+.custon-input::placeholder {
+    color: #999;
+}
+
+.custon-input:focus {
+    border-color: #ccc;
+}
+
+.form-input {
+    width: 100%;
+    max-width: 320px;
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin: 0.4rem 0rem;
+    font-size: 14px;
+    background-color: white;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    width: 100%;
+    justify-content: center;
+}
+
+.content mat-label {
+    font-size: 10px;
+}
+
+
+//-----ALERTA-----
+.form-alert {
+    color: red;
+    font-size: 12px;
+}
+
+.form-input.ng-invalid.ng-touched {
+    border-color: red;
 }

@@ -14,6 +14,10 @@ const routes: Routes = [
         path: 'home',
         component: ViewProductComponent
     },
+    {
+        path: 'create-product',
+        component: createProductComponent
+    },
 
 ];
 

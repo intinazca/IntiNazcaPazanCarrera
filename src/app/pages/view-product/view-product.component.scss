@@ -1,22 +1,3 @@
-.search-input {
-  width: 100%;
-  max-width: 300px;
-  padding: 5px 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  background-color: white;
-  outline: none;
-}
-
-.search-input::placeholder {
-  color: #999;
-}
-
-.search-input:focus {
-  border-color: #ccc;
-}
-
 // tabla:
 .table-container {
   overflow: auto;
@@ -62,19 +43,4 @@
 .container-actions{
   display: flex;
   justify-content: space-between;
-}
-
-
-.btn-agregar { 
-  background-color: #f5df66;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-agregar:hover {
-  background-color: #f8e681;
 }

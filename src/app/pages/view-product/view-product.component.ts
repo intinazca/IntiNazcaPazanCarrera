@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../interface/interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-product',
@@ -14,7 +15,10 @@ export class ViewProductComponent implements OnInit {
   paginatedValues: Product[] = [];
   searchTerm: string = '';
 
-  constructor(private service: ProductService) {}
+  constructor(
+    private service: ProductService,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     try {
@@ -45,9 +49,13 @@ export class ViewProductComponent implements OnInit {
     this.currentPage = 1; // Resetea a la primera página al cambiar el término de búsqueda
     this.updatePaginatedValues();
   }
-  
+
   trackById(index: number, item: Product) {
     return item.id;
+  }
+
+  navigateToCreateProduct(){
+    this.router.navigate(['/create-product']);
   }
   
 }

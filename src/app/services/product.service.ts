@@ -33,7 +33,7 @@ export class ProductService {
     //crear producto
     postProduct(data: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.http.post(`${environment.URL_API}/bp/products`, data)
+            this.http.post(`/bp/products`, data)
                 .subscribe(
                     data => {
                         resolve(data);
@@ -47,7 +47,7 @@ export class ProductService {
     //actualizar prodcuto
     updataProduct(data: any, id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.http.put(`${environment.URL_API}/bp/products/${id}`, data)
+            this.http.put(`/bp/products/${id}`, data)
                 .subscribe(
                     data => {
                         resolve(data);
@@ -61,7 +61,7 @@ export class ProductService {
     //eliminar producto
     deleteProduct(id:any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.http.delete(`${environment.URL_API}/bp/products/${id}`)
+            this.http.delete(`/bp/products/${id}`)
                 .subscribe(
                     data => {
                         resolve(data);
@@ -76,7 +76,7 @@ export class ProductService {
     //verificar id
     getProductId(id:any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.http.delete(`${environment.URL_API}/bp/products/verification${id}`)
+            this.http.get(`/bp/products/verification/${id}`)
                 .subscribe(
                     data => {
                         resolve(data);
