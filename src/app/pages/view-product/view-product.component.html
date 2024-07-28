@@ -1,4 +1,5 @@
 <div class="container">
+    @defer (on viewport){
     <div style="width: 100%;">
         <div class="container-actions">
             <input type="text" class="custon-input" placeholder="Search..." [(ngModel)]="searchTerm"
@@ -16,15 +17,15 @@
                             <tr>
                                 <th>Logo</th>
                                 <th>Nombre del Producto</th>
-                                <th>Descripción  <span class="info-icon">i</span> </th>
-                                <th>Fecha de liberación  <span class="info-icon">i</span></th>
-                                <th>Fecha de reestructuración  <span class="info-icon">i</span></th>
+                                <th>Descripción <span class="info-icon">i</span> </th>
+                                <th>Fecha de liberación <span class="info-icon">i</span></th>
+                                <th>Fecha de reestructuración <span class="info-icon">i</span></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of paginatedValues; trackBy: trackById">
-                                <td><img [src]="item.logo" alt="Logo" class="logo-img"></td>
+                                <td><img [ngSrc]="item.logo" alt="Logo" class="logo-img" width="32" height="32" priority></td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.description}}</td>
                                 <td>{{item.date_revision}}</td>
@@ -56,6 +57,12 @@
             </div>
         </div>
     </div>
+    } @placeholder {
+    <p>Future comments</p>
+    }@loading (minimum 1s){
+        <p>Cargando los Productos...</p>
+    }
+
 </div>
 <app-modal *ngIf="showModal" [message]="messageModal" (result)="handleModalResult($event)"></app-modal>
 <app-toast *ngIf="toastVisible" [toastData]="toastData"></app-toast>

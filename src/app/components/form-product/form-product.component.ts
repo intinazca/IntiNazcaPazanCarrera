@@ -23,6 +23,9 @@ export class FormProductComponent implements OnInit {
   toastVisible: boolean = false;
   toastData!: toastInterface;
 
+  // spinner
+  isLoading: boolean = false;
+
   constructor(
     private service: ProductService,
     // formulario
@@ -137,6 +140,7 @@ export class FormProductComponent implements OnInit {
 
   async createProduct() {
     try {
+      this.isLoading = true;
       const idValue = this.createItemGroup.get('id')?.value;
 
       if (this.type == 'edit' && this.produtToEdit) {
@@ -145,8 +149,10 @@ export class FormProductComponent implements OnInit {
         console.log("response:", response);
 
         if (response.message) {
-          console.log("editafo con exito");
-          this.showToast({ message: 'Editado con exito', duration: 3000, type: 'success' });
+          setTimeout(() => {
+            this.isLoading = false;
+            this.showToast({ message: 'Editado con exito', duration: 3000, type: 'success' });
+          }, 1000);
         }
       } else {
         // creamos uno nuevo
@@ -156,16 +162,23 @@ export class FormProductComponent implements OnInit {
           const response = await this.service.postProduct(this.createItemGroup.value);
 
           if (response.message) {
-            this.showToast({ message: 'Guardado con exito', duration: 3000, type: 'success' });
+            setTimeout(() => {
+              this.isLoading = false;
+              this.showToast({ message: 'Guardado con éxito', duration: 3000, type: 'success' });
+            }, 1000);
           }
+          
         } else {
-          console.log("ya existe con ese id");
-          this.showToast({ message: 'El producto ya esxiste con ese id', duration: 3000, type: 'warning' });
+          setTimeout(() => {
+            this.isLoading = false;
+            this.showToast({ message: 'El producto ya existe con ese id', duration: 3000, type: 'warning' });
+          }, 1000);
         }
       }
 
     } catch (error) {
       // toast de error
+      setTimeout(() => this.isLoading = false, 1000);
       this.showToast({ message: 'Error al guardar', duration: 3000, type: 'error' });
       console.log(error);
     }
