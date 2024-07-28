@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-    font-family: 'Roboto', Arial, sans-serif; 
+    font-family: 'Roboto', Arial, sans-serif;
     background-color: #f4f6f9;
     margin: 0px;
 }
@@ -37,6 +37,7 @@ h2 {
     padding: 1rem;
     background-color: white;
     border-radius: 5px;
+    position: relative;
 }
 
 //stylo global para botones
@@ -59,6 +60,10 @@ h2 {
 }
 
 // stylos golbales para formularios
+.container-boddy{
+    margin-bottom: 3rem;
+    margin-top: 0.5rem;
+}
 
 .mat-form-field {
     flex: 1 1 calc(50% - 16px);
@@ -81,6 +86,7 @@ h2 {
 }
 
 .header-form {
+    padding-bottom: 0.8rem;
     text-align: center;
     border-bottom: 2px solid gray;
 }
@@ -119,11 +125,9 @@ h2 {
 }
 
 .form-input {
-    width: 100%;
-    max-width: 320px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     border: 2px solid #ccc;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 0.4rem 0rem;
     font-size: 14px;
     background-color: white;
@@ -134,6 +138,24 @@ h2 {
 .form-input:focus {
     border-color: #aaa;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-input {
+        width: 85%;
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .content {
+        padding: 0.4rem;
+    }
 }
 
 .content {
@@ -169,18 +191,32 @@ h2 {
     padding: 0;
     margin: 0;
     z-index: 1000;
-  }
-  
-  .dropdown li {
+    right: 0;
+}
+
+.dropdown li {
     padding: 8px 12px;
     cursor: pointer;
-  }
-  
-  .dropdown li:hover {
+}
+
+.dropdown li:hover {
     background-color: #f0f0f0;
-  }
-  
-  .menu-button {
+}
+
+.menu-button {
     cursor: pointer;
-  }
-  
+    position: relative;
+    transform: rotate(90deg);;
+}
+
+.dots {
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+@media (max-width: 767px) {
+    .dropdown {
+        left: auto;
+        right: 0;
+    }
+}
